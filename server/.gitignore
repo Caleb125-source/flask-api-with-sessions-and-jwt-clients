@@ -10,3 +10,4 @@ instance/
 .DS_Store
 .pytest_cache/
 migrations/
+cookies.txt
