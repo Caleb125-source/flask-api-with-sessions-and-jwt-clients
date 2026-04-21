@@ -28,13 +28,8 @@ def create_app():
     # Register all API resources
     api = Api(app)
 
-    # Import here to avoid circular imports
-    from resources.auth_resources import (
-        Signup, Login, Logout, CheckSession
-    )
-    from resources.journal_resources import (
-        JournalEntryList, JournalEntryDetail
-    )
+    from resources.auth_resources import Signup, Login, Logout, CheckSession
+    from resources.journal_resources import JournalEntryList, JournalEntryDetail
 
     # Auth routes
     api.add_resource(Signup,       "/signup")
