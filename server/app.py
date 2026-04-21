@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_restful import Api
+from flask_cors import CORS
 
 # Initialise extensions (not bound to an app yet)
 db = SQLAlchemy()
@@ -19,6 +20,10 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
+
+    # Allow requests from the React frontend origin
+    # supports_credentials=True is needed so that session cookies can be sent and received across origins
+    CORS(app, origins=["http://localhost:3000"], supports_credentials=True)
 
     # Register all API resources
     api = Api(app)
