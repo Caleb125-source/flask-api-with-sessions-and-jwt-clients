@@ -10,5 +10,9 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # Sessions are server-side (not JWT) — cookies are HttpOnly
-    SESSION_TYPE = "filesystem"
+    # Required for cross-origin session cookies to work in the browser
+    SESSION_COOKIE_SAMESITE = "Lax"
+    SESSION_COOKIE_HTTPONLY = True
+
+    # Set to True in production when serving over HTTPS
+    SESSION_COOKIE_SECURE = False
