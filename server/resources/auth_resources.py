@@ -24,7 +24,7 @@ class Signup(Resource):
         try:
             user = User(
                 username=data["username"],
-                email=data.get("email", ""),
+                email=data.get("email") or None,
             )
             user.password = data["password"]
             db.session.add(user)
