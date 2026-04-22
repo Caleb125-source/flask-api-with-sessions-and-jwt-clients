@@ -8,7 +8,7 @@ class User(db.Model):
 
     id         = db.Column(db.Integer, primary_key=True)
     username   = db.Column(db.String(80), unique=True, nullable=False)
-    email      = db.Column(db.String(120), unique=True, nullable=False)
+    email      = db.Column(db.String(120), unique=True, nullable=True)
     # Stores only the bcrypt hash — never the plaintext password
     _password_hash = db.Column(db.String(128), nullable=False)
 
@@ -42,6 +42,8 @@ class User(db.Model):
 
     @validates("email")
     def validate_email(self, key, value):
+        if not value:
+            return None
         if "@" not in value:
             raise ValueError("Invalid email address.")
         return value.lower().strip()
